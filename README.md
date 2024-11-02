@@ -27,15 +27,14 @@ DESIGNPATTERNSDSI/
 ├── src/
 │   ├── main/
 │   │   ├── java/
-│   │   │   └── com/
-│   │   │       └── design_patterns/
-│   │   │           ├── factory/           # Fábricas de productos
-│   │   │           ├── singleton/         # Manejo del carrito (Singleton)
-│   │   │           ├── adapter/           # Servicio de pago externo
-│   │   │           ├── builder/           # Builder para productos personalizados
-│   │   │           ├── decorator/         # Decorador para agregar características
-│   │   │           ├── model/             # Clases de productos
-│   │   │           ├── gui/               # Interfaz gráfica de usuario (GUI)
+│   │   │   └── design_patterns/
+│   │   │       ├── factory/           # Fábricas de productos
+│   │   │       ├── singleton/         # Manejo del carrito (Singleton)
+│   │   │       ├── adapter/           # Servicio de pago externo
+│   │   │       ├── builder/           # Builder para productos personalizados
+│   │   │       ├── decorator/         # Decorador para agregar características
+│   │   │       ├── model/             # Clases de productos
+│   │   │       ├── gui/               # Interfaz gráfica de usuario (GUI)
 │   │   │          
 └── README.md
 ```
