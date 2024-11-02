@@ -23,12 +23,12 @@ Este proyecto utiliza varios patrones de diseño de software:
 ## 📂 Estructura del Proyecto
 
 ```plaintext
-OnlineStoreApp/
+DESIGNPATTERNSDSI/
 ├── src/
 │   ├── main/
 │   │   ├── java/
 │   │   │   └── com/
-│   │   │       └── onlinestore/
+│   │   │       └── design_patterns/
 │   │   │           ├── factory/           # Fábricas de productos
 │   │   │           ├── singleton/         # Manejo del carrito (Singleton)
 │   │   │           ├── adapter/           # Servicio de pago externo
@@ -36,7 +36,7 @@ OnlineStoreApp/
 │   │   │           ├── decorator/         # Decorador para agregar características
 │   │   │           ├── model/             # Clases de productos
 │   │   │           ├── gui/               # Interfaz gráfica de usuario (GUI)
-│   │   │           └── OnlineStoreApp.java # Clase principal de ejecución
+│   │   │          
 └── README.md
 ```
 
@@ -63,16 +63,16 @@ La GUI es intuitiva y fácil de usar. Los usuarios pueden:
 
 1. **Clona el repositorio** en tu máquina local:
    ```bash
-   git clone https://github.com/tuusuario/OnlineStoreApp.git
+   git clone https://github.com/Em3rc0d/designPatternsDSI.git
    ```
 2. **Compila el proyecto**. Si usas la línea de comandos:
    ```bash
-   cd OnlineStoreApp/src/main/java
-   javac com/onlinestore/OnlineStoreApp.java
+   cd designPatternsDSI/src/main/java
+   javac design_patterns/GUI/StoreGUI.java
    ```
 3. **Ejecuta la aplicación**:
    ```bash
-   java com.onlinestore.OnlineStoreApp
+   java design_patterns/GUI/StoreGUI
    ```
    
 ## 🧩 Ejemplo de Uso
