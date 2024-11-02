@@ -23,6 +23,33 @@ public class ProductBuilder {
     }
 
     public Product build() {
-        return new Product(name, price, description);
+        validateProductData();
+        Product product = new Product(name, price, description);
+        reset(); // Reinicia el builder para su reutilización
+        return product;
+    }
+
+    private void validateProductData() {
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("El nombre del producto no puede estar vacío.");
+        }
+        if (price < 0) {
+            throw new IllegalArgumentException("El precio no puede ser negativo.");
+        }
+        if(description == null || description.isEmpty()) {
+            throw new IllegalArgumentException("La descripción del producto no puede estar vacío.");
+        }
+        if(description.length() > 100) {
+            throw new IllegalArgumentException("La descripción del producto no puede exceder los 100 caracteres.");
+        }
+        if(description.length() < 10) {
+            throw new IllegalArgumentException("La descripción del producto debe tener al menos 10 caracteres.");
+        }
+    }
+
+    public void reset() {
+        this.name = null;
+        this.price = 0.0;
+        this.description = null;
     }
 }

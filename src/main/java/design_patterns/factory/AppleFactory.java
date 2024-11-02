@@ -2,15 +2,39 @@ package design_patterns.factory;
 
 import design_patterns.model.Laptop;
 import design_patterns.model.Smartphone;
+import design_patterns.model.Smartwatch;
+import design_patterns.model.Tablet;
 
 public class AppleFactory implements BrandFactory {
+    private final ProductFactory laptopFactory;
+    private final ProductFactory smartphoneFactory;
+    private final ProductFactory tabletFactory;
+    private final ProductFactory smartwatchFactory;
+
+    public AppleFactory() {
+        this.laptopFactory = new LaptopFactory();
+        this.smartphoneFactory = new SmartphoneFactory();
+        this.tabletFactory = new TabletFactory();
+        this.smartwatchFactory = new SmartwatchFactory();
+    }
+
     @Override
     public Laptop createLaptop() {
-        return new Laptop("Apple MacBook Pro", 2000.0);
+        return (Laptop) laptopFactory.createProduct();
     }
 
     @Override
     public Smartphone createSmartphone() {
-        return new Smartphone("iPhone", 1200.0);
+        return (Smartphone) smartphoneFactory.createProduct();
+    }
+
+    @Override
+    public Tablet createTablet() {
+        return (Tablet) tabletFactory.createProduct();
+    }
+
+    @Override
+    public Smartwatch createSmartwatch() {
+        return (Smartwatch) smartwatchFactory.createProduct();
     }
 }

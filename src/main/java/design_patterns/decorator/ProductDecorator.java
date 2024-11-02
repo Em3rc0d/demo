@@ -10,5 +10,13 @@ public abstract class ProductDecorator extends Product {
         this.product = product;
     }
 
-    public abstract double getPrice();
+    @Override
+    public double getPrice() {
+        return product.getPrice();
+    }
+
+    @Override
+    public String getDescription() {
+        return product.getDescription();
+    }
 }

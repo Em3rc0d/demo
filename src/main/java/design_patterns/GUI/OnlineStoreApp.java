@@ -1,4 +1,4 @@
-package design_patterns;
+package design_patterns.GUI;
 
 import design_patterns.singleton.CartManager;
 import design_patterns.factory.*;

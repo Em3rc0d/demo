@@ -9,6 +9,11 @@ public class WarrantyDecorator extends ProductDecorator {
 
     @Override
     public double getPrice() {
-        return product.getPrice() + 100.0;
+        return super.getPrice() + 100.0;
+    }
+
+    @Override
+    public String getDescription() {
+        return super.getDescription() + " + Incluye garantía extendida";
     }
 }
