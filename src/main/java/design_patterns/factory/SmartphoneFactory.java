@@ -5,6 +5,6 @@ import design_patterns.model.Smartphone;
 public class SmartphoneFactory implements ProductFactory {
     @Override
     public Smartphone createProduct() {
-        return new Smartphone("Default Smartphone", 800.0); // Proporciona valores predeterminados
+        return new Smartphone("Smartphone", 800.0); // Proporciona valores predeterminados
     }
 }
