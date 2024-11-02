@@ -5,7 +5,9 @@ public class Product {
     private double price;
     private String description;
     private int quantity ; // Nuevo campo
-
+    
+    public Product() {
+    }
     public Product(String name, double price, String description) {
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("El nombre del producto no puede estar vacío.");

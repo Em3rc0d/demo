@@ -5,6 +5,7 @@ import design_patterns.factory.*;
 import design_patterns.model.Product;
 import design_patterns.adapter.ExternalPaymentService;
 import design_patterns.adapter.PaymentAdapter;
+import design_patterns.decorator.WarrantyDecorator;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -120,42 +121,52 @@ public class StoreGUI extends JFrame {
     }
 
     private void showProductDetails(Product product) {
-        String details = "<html><strong>Nombre:</strong> " + product.getName() + "<br>" +
-                         "<strong>Precio:</strong> $" + product.getPrice() + "<br>" +
-                         "<strong>Descripción:</strong> " + product.getDescription() + "</html>";
-    
-        // Crear un campo para ingresar la cantidad
-        JSpinner quantitySpinner = new JSpinner(new SpinnerNumberModel(1, 1, 100, 1)); // 1 es el mínimo, 100 es el máximo
-    
-        // Mostrar el diálogo con detalles del producto y el campo de cantidad
-        Object[] message = {
-            details,
-            "Cantidad:", quantitySpinner
-        };
-    
-        int result = JOptionPane.showConfirmDialog(this, message, "Detalles del Producto", JOptionPane.OK_CANCEL_OPTION);
-        if (result == JOptionPane.OK_OPTION) {
-            int quantity = (Integer) quantitySpinner.getValue(); // Obtener la cantidad ingresada
-            product.setQuantity(quantity); // Supone que tienes un método setQuantity en Product
-            cartManager.addProduct(product);
-            updateCartDisplay();
-            JOptionPane.showMessageDialog(this, product.getName() + " ha sido agregado al carrito.");
+    String details = "<html><strong>Nombre:</strong> " + product.getName() + "<br>" +
+                     "<strong>Precio:</strong> $" + product.getPrice() + "<br>" +
+                     "<strong>Descripción:</strong> " + product.getDescription() + "</html>";
+
+    // Crear un campo para ingresar la cantidad
+    JSpinner quantitySpinner = new JSpinner(new SpinnerNumberModel(1, 1, 100, 1)); // 1 es el mínimo, 100 es el máximo
+
+    // Crear un checkbox para la garantía extendida
+    JCheckBox warrantyCheckBox = new JCheckBox("Agregar garantía extendida (+$100)");
+
+    // Mostrar el diálogo con detalles del producto, campo de cantidad y checkbox de garantía
+    Object[] message = {
+        details,
+        "Cantidad:", quantitySpinner,
+        warrantyCheckBox
+    };
+
+    int result = JOptionPane.showConfirmDialog(this, message, "Detalles del Producto", JOptionPane.OK_CANCEL_OPTION);
+    if (result == JOptionPane.OK_OPTION) {
+        int quantity = (Integer) quantitySpinner.getValue(); // Obtener la cantidad ingresada
+        if (warrantyCheckBox.isSelected()) {
+            // Aplicar el decorador de garantía extendida si está seleccionado
+            product = new WarrantyDecorator(product);
         }
+        product.setQuantity(quantity); // Supone que tienes un método setQuantity en Product
+        cartManager.addProduct(product);
+        updateCartDisplay();
+        JOptionPane.showMessageDialog(this, product.getName() + " ha sido agregado al carrito.");
     }
+}
+
     
 
-    private void updateCartDisplay() {
-        productTableModel.setRowCount(0); // Limpiar la tabla actual
+private void updateCartDisplay() {
+    productTableModel.setRowCount(0); // Limpiar la tabla actual
 
-        double total = 0.0;
+    double total = 0.0;
 
-        for (Product product : cartManager.getProducts()) {
-            total += product.getTotalPrice(); // Considerar el total basado en cantidad
-            productTableModel.addRow(new Object[]{product.getName(), product.getPrice(), product.getQuantity(), product.getTotalPrice()}); // Agregar fila a la tabla
-        }
-
-        totalLabel.setText("Total: $" + total);
+    for (Product product : cartManager.getProducts()) {
+        total += product.getTotalPrice(); // Usar el precio total con la garantía incluida, si aplica
+        productTableModel.addRow(new Object[]{product.getName(), product.getPrice(), product.getQuantity(), product.getTotalPrice()});
     }
+
+    totalLabel.setText("Total: $" + total);
+}
+
 
     private void removeProduct() {
         String productName = JOptionPane.showInputDialog(this, "Ingrese el nombre del producto a eliminar:");
@@ -208,14 +219,14 @@ public class StoreGUI extends JFrame {
     
 
     private void processPayment() {
-        double total = cartManager.getTotal(); // Use the method that considers quantities
-
+        double total = cartManager.getTotal(); // Usa el método que ya considera los precios totales
+    
         if (total > 0) {
             try {
                 PaymentAdapter paymentAdapter = new PaymentAdapter(new ExternalPaymentService());
                 paymentAdapter.pay(total);
                 JOptionPane.showMessageDialog(this, "Pago de $" + total + " procesado exitosamente.");
-                cartManager.clearCart(); // Clear cart after payment
+                cartManager.clearCart(); // Limpiar el carrito después del pago
                 updateCartDisplay();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Error al procesar el pago: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -224,6 +235,7 @@ public class StoreGUI extends JFrame {
             JOptionPane.showMessageDialog(this, "El carrito está vacío.");
         }
     }
+    
 
     private void clearCart() {
         cartManager.clearCart();
