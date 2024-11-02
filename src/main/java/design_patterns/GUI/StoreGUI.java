@@ -222,58 +222,7 @@ private void removeProduct() {
     } else {
         JOptionPane.showMessageDialog(this, "No se ingresó un nombre de producto válido.");
     }
-}
-
-
-    // private void removeProduct() {
-    //     String productName = JOptionPane.showInputDialog(this, "Ingrese el nombre del producto a eliminar:");
-    
-    //     if (productName != null && !productName.trim().isEmpty()) {
-    //         Product productToRemove = null;
-    //         for (Product product : cartManager.getProducts()) {
-    //             if (product.getName().equalsIgnoreCase(productName)) {
-    //                 productToRemove = product;
-    //                 break;
-    //             }
-    //         }
-    
-    //         if (productToRemove != null) {
-    //             String[] options = {"Eliminar toda la cantidad", "Eliminar cantidad específica"};
-    //             int choice = JOptionPane.showOptionDialog(this, "¿Qué desea hacer?", "Eliminar Producto",
-    //                     JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-    
-    //             if (choice == 0) {
-    //                 // Opción 1: Eliminar toda la cantidad
-    //                 cartManager.removeProduct(productName);
-    //                 JOptionPane.showMessageDialog(this, productName + " ha sido eliminado del carrito.");
-    //             } else if (choice == 1) {
-    //                 // Opción 2: Eliminar cantidad específica
-    //                 String quantityInput = JOptionPane.showInputDialog(this, "Ingrese la cantidad a eliminar:");
-    //                 try {
-    //                     int quantityToRemove = Integer.parseInt(quantityInput);
-    //                     if (quantityToRemove > 0 && quantityToRemove <= productToRemove.getQuantity()) {
-    //                         productToRemove.setQuantity(productToRemove.getQuantity() - quantityToRemove);
-    //                         if (productToRemove.getQuantity() == 0) {
-    //                             cartManager.removeProduct(productName); // Si la cantidad llega a cero, eliminamos el producto
-    //                         }
-    //                         updateCartDisplay();
-    //                         JOptionPane.showMessageDialog(this, "Se han eliminado " + quantityToRemove + " de " + productName + " del carrito.");
-    //                     } else {
-    //                         JOptionPane.showMessageDialog(this, "Cantidad no válida.", "Error", JOptionPane.ERROR_MESSAGE);
-    //                     }
-    //                 } catch (NumberFormatException e) {
-    //                     JOptionPane.showMessageDialog(this, "Entrada no válida. Debe ser un número entero.", "Error", JOptionPane.ERROR_MESSAGE);
-    //                 }
-    //             }
-    //             updateCartDisplay(); // Actualiza la visualización del carrito
-    //         } else {
-    //             JOptionPane.showMessageDialog(this, "No se encontró el producto: " + productName);
-    //         }
-    //     } else {
-    //         JOptionPane.showMessageDialog(this, "No se ingresó un nombre de producto válido.");
-    //     }
-    // }
-    
+}   
 
     private void processPayment() {
         double total = cartManager.getTotal(); // Usa el método que ya considera los precios totales
